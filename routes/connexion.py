@@ -15,12 +15,13 @@ class connexion1(Resource):
 		body = connexion1_post_args.parse_args()
 		[user,password] = [body[i] for i in body]
 
-		users = {"Louise":"2304","Erwan":"3545"}
+		users = {"Louise":"1234","Erwan":"4321"}
 
 		if user in users:
 
 			if users[user] == password:
 				return "ok"
+				
 		return "pas ok"
 
 
@@ -30,7 +31,7 @@ class connexion2(Resource):
 		body = connexion2_post_args.parse_args()
 		[Nom,Prenom] = [body[i] for i in body]
 
-		personnes = [{"Nom":"Kerbrat","Prenom":"Erwan","Age":24,"Partenaire":""},
+		personnes = [{"Nom":"Kerbrat","Prenom":"Erwan","Age":24,"Partenaire":"Alizée"},
 					 {"Nom":"Leroux","Prenom":"Louise","Age":45,"Partenaire":"Auresh"}]
 
 		for i in range(len(personnes)):
