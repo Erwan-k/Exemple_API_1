@@ -31,7 +31,7 @@ class connexion2(Resource):
 		body = connexion2_post_args.parse_args()
 		[Nom,Prenom] = [body[i] for i in body]
 
-		personnes = [{"Nom":"Kerbrat","Prenom":"Erwan","Age":24,"Partenaire":"Alizée"},
+		personnes = [{"Nom":"Kerbrat","Prenom":"Erwan","Age":24,"Partenaire":""},
 					 {"Nom":"Leroux","Prenom":"Louise","Age":45,"Partenaire":"Auresh"}]
 
 		for i in range(len(personnes)):
