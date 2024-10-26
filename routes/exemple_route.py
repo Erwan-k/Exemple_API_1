@@ -30,7 +30,7 @@ class exemple_route(Resource):
 			return {"retour":"L'utilisateur n'exite pas."}
 
 
-		return {"retour":"ok","valeur":donnees[i]["password"]}
+		return {"retour":"ok","valeur":donnees[indexe]["password"]}
 
 	def post(self): #ajouter un utilisateur
 		body = exemple_route_post_args.parse_args()
