@@ -63,7 +63,7 @@ class exemple_route(Resource):
 			return {"retour":"L'utilisateur n'exite pas."}
 
 		#Je modifie le mot de passe de l'utilisateur
-		donnees[i]["password"] = password
+		donnees[indexe]["password"] = password
 			
 		return {"retour":"ok"}
 
