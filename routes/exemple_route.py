@@ -20,17 +20,10 @@ class exemple_route(Resource):
 
 		global donnees
 		
-		indexe = -1
-		for i in range(len(donnees)):
-			if donnees[i]["user"] == user:
-				indexe = i
-
-		#Je vérifie que l'utilisateur exite
-		if indexe == -1:
-			return {"retour":"L'utilisateur n'exite pas."}
-
-
-		return {"retour":"ok","valeur":donnees[indexe]["password"]}
+		noms = [elem["user"] for elem in donnees]
+		if user not in noms: return {"retour":"L'utilisateur n'exite pas."}
+			
+		return {"retour":"ok","valeur":donnees[noms.index(user)]["password"]}
 
 	def post(self): #ajouter un utilisateur
 		body = exemple_route_post_args.parse_args()
@@ -39,8 +32,8 @@ class exemple_route(Resource):
 		global donnees
 
 		#Je vérifie que l'utilisateur n'existe pas déjà
-		if any([1 for i in donnees if i["user"] == user]):
-			return {"retour":"L'utilisateur existe déjà."}
+		noms = [elem["user"] for elem in donnees]
+		if user in noms: return {"retour":"L'utilisateur existe déjà."}
 
 		#J'ajoute l'utilisateur
 		donnees += [{"user":user,"password":password}]
@@ -53,17 +46,11 @@ class exemple_route(Resource):
 
 		global donnees
 		
-		indexe = -1
-		for i in range(len(donnees)):
-			if donnees[i]["user"] == user:
-				indexe = i
-
-		#Je vérifie que l'utilisateur exite
-		if indexe == -1:
-			return {"retour":"L'utilisateur n'exite pas."}
+		noms = [elem["user"] for elem in donnees]
+		if user not in noms: return {"retour":"L'utilisateur n'existe pas."}
 
 		#Je modifie le mot de passe de l'utilisateur
-		donnees[indexe]["password"] = password
+		donnees[noms.index(user)]["password"] = password
 			
 		return {"retour":"ok"}
 
@@ -73,17 +60,8 @@ class exemple_route(Resource):
 
 		global donnees
 		
-		indexe = -1
-		for i in range(len(donnees)):
-			if donnees[i]["user"] == user:
-				indexe = i
-
-		#Si l'utilisateur n'existait pas déjà
-		if indexe == -1:
-			return {"retour":"ok","note":"L'utilisateur n'existait pas."}
-
 		#Je supprimer l'utilisateur
-		donnees.pop(indexe)
+		donnees = [elem for elem in donnees if elem["user"] != user]
 
 		return {"retour":"ok"}
 
